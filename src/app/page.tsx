@@ -208,7 +208,7 @@ export default function Home() {
                   <motion.div variants={fadeUp} className="flex items-center gap-4">
                     <span className="text-[#6d6875] text-sm">Connect:</span>
                     {[
-                      { name: "LinkedIn", href: "#" },
+                      { name: "LinkedIn", href: "https://www.linkedin.com/in/richa-kandhway-782655330" },
                       { name: "Email", href: "mailto:richakandhway@gmail.com" },
                     ].map((social) => (
                       <motion.a

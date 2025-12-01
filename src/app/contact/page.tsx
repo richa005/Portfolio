@@ -26,7 +26,7 @@ const contactInfo = [
     value: "Connect with me",
     icon: "💼",
     color: "#c8b6ff",
-    link: "#",
+    link: "https://www.linkedin.com/in/richa-kandhway-782655330",
   },
   {
     title: "Location",

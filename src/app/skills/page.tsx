@@ -95,12 +95,6 @@ const learningGoals = [
     progress: 35,
     color: "#e8c872",
   },
-  {
-    title: "Python for Finance",
-    description: "Learning programming basics for financial data analysis",
-    progress: 15,
-    color: "#a8d5ba",
-  },
 ];
 
 export default function SkillsPage() {

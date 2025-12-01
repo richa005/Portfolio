@@ -172,7 +172,7 @@ This project is open source and available under the [MIT License](LICENSE).
 <div align="center">
 
 [![Email](https://img.shields.io/badge/Email-richakandhway%40gmail.com-f4a5b8?style=for-the-badge&logo=gmail&logoColor=white)](mailto:richakandhway@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-c8b6ff?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-c8b6ff?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/richa-kandhway-782655330)
 
 </div>
 
