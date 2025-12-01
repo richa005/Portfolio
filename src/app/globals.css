@@ -1,26 +1,409 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Modern Feminine Color Palette - World Class Design */
+  --background: #0a0a0c;
+  --background-secondary: #0d0d10;
+  --background-card: #151419;
+  --foreground: #faf8f5;
+  --foreground-muted: #a8a3b3;
+  --foreground-subtle: #8b8693;
+  --foreground-faint: #6d6875;
+  
+  /* Primary - Rose Pink */
+  --rose: #f4a5b8;
+  --rose-light: #f8c4d0;
+  --rose-dark: #e87a94;
+  --rose-glow: rgba(244, 165, 184, 0.15);
+  
+  /* Secondary - Lilac */
+  --lilac: #c8b6ff;
+  --lilac-light: #ddd6fe;
+  --lilac-dark: #a78bfa;
+  --lilac-glow: rgba(200, 182, 255, 0.15);
+  
+  /* Accent - Gold */
+  --gold: #e8c872;
+  --gold-light: #f5dda0;
+  --gold-dark: #d4a843;
+  
+  /* Accent 2 - Sage Green */
+  --sage: #a8d5ba;
+  --sage-light: #c8e6d0;
+  --sage-dark: #7bc496;
+  
+  /* Neutral - Cool Gray */
+  --gray-900: #0a0a0c;
+  --gray-800: #151419;
+  --gray-700: #1a1a1f;
+  --gray-600: #27272a;
+  --gray-500: #3f3f46;
+  --gray-400: #52525b;
+  --gray-300: #71717a;
+  --gray-200: #a1a1aa;
+  --gray-100: #d4d4d8;
+  
+  /* Border */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-medium: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-cormorant);
+  --font-mono: var(--font-space);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Custom Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rose) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--rose), var(--lilac));
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--rose);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* Selection */
+::selection {
+  background: var(--rose);
+  color: var(--background);
+}
+
+::-moz-selection {
+  background: var(--rose);
+  color: var(--background);
+}
+
+/* Focus States */
+*:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 2px;
+}
+
+/* ============ BACKGROUND PATTERNS ============ */
+
+/* Subtle Grid Pattern */
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(244,165,184,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244,165,184,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Dot Pattern */
+.bg-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Noise Texture */
+.bg-noise {
+  position: relative;
+}
+
+.bg-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============ ANIMATIONS ============ */
+
+/* Infinite Scroll */
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50%)); }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) linear infinite;
+  animation-direction: var(--animation-direction, forwards);
+}
+
+/* Floating */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Pulse Glow */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Gradient Shift */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Shimmer */
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* ============ GLOW EFFECTS ============ */
+
+.glow-rose {
+  box-shadow: 0 0 40px var(--rose-glow), 0 0 80px var(--rose-glow);
+}
+
+.glow-lilac {
+  box-shadow: 0 0 40px var(--lilac-glow), 0 0 80px var(--lilac-glow);
+}
+
+.glow-text {
+  text-shadow: 0 0 30px var(--rose-glow);
+}
+
+/* ============ GLASS EFFECTS ============ */
+
+.glass {
+  background: rgba(21, 20, 25, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+}
+
+.glass-strong {
+  background: rgba(21, 20, 25, 0.95);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid var(--border-medium);
+}
+
+/* ============ GRADIENT TEXT ============ */
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--rose), var(--lilac));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, var(--gold), var(--rose));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============ CARD STYLES ============ */
+
+.card {
+  background: var(--background-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  border-color: var(--border-medium);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-interactive {
+  background: var(--background-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-interactive:hover {
+  border-color: var(--rose);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px var(--rose-glow);
+}
+
+/* ============ BUTTON STYLES ============ */
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--rose), var(--lilac));
+  color: var(--background);
+  font-weight: 500;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(244, 165, 184, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--foreground);
+  font-weight: 500;
+  padding: 12px 28px;
+  border: 1px solid var(--border-medium);
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  border-color: var(--rose);
+  background: rgba(244, 165, 184, 0.05);
+}
+
+/* ============ INPUT STYLES ============ */
+
+.input {
+  background: var(--background-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--foreground);
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.input::placeholder {
+  color: var(--foreground-faint);
+}
+
+.input:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 3px var(--rose-glow);
+  outline: none;
+}
+
+/* ============ TEXT UTILITIES ============ */
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* ============ SMOOTH SCROLL LENIS ============ */
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ============ PAGE TRANSITIONS ============ */
+
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* ============ RESPONSIVE UTILITIES ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hide custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
 }
