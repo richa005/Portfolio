@@ -7,7 +7,7 @@
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=F4A5B8&center=true&vCenter=true&random=false&width=500&lines=2nd+Year+Commerce+Student;Finance+%26+Accounting+Enthusiast;Quick+Learner+%7C+Team+Player;Building+My+Future+in+Finance" alt="Typing SVG" />
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-f4a5b8?style=for-the-badge&logo=vercel&logoColor=black)](https://portfolio-xi-ruby-73.vercel.app/)
-[![Email](https://img.shields.io/badge/Email-c8b6ff?style=for-the-badge&logo=gmail&logoColor=black)](mailto:richakandhway@gmail.com)
+[![Email](https://img.shields.io/badge/Email-c8b6ff?style=for-the-badge&logo=gmail&logoColor=black)](mailto:richakandhway11@gmail.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/richa-kandhway-782655330)
 
 </div>
@@ -123,7 +123,7 @@ const richa = {
 I'm actively seeking opportunities to apply my knowledge and gain practical experience in the finance industry. Feel free to reach out!
 
 [![Portfolio](https://img.shields.io/badge/🌐_Visit_My_Portfolio-f4a5b8?style=for-the-badge)](https://portfolio-xi-ruby-73.vercel.app/)
-[![Email Me](https://img.shields.io/badge/📧_Email_Me-c8b6ff?style=for-the-badge)](mailto:richakandhway@gmail.com)
+[![Email Me](https://img.shields.io/badge/📧_Email_Me-c8b6ff?style=for-the-badge)](mailto:richakandhway11@gmail.com)
 
 </div>
 

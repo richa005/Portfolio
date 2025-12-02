@@ -177,10 +177,10 @@ export default function About() {
                 </svg>
               </a>
               <a
-                href="mailto:richakandhway@gmail.com"
+                href="mailto:richakandhway11@gmail.com"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-[#a1a1aa] border border-[#27272a] hover:border-[#3f3f46] hover:text-white transition-all"
               >
-                richakandhway@gmail.com
+                richakandhway11@gmail.com
               </a>
             </motion.div>
           </motion.div>

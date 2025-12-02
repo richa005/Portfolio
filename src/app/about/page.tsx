@@ -14,7 +14,7 @@ import { useLenis } from "@/hooks/useLenis";
 // Personal info data
 const personalInfo = [
   { label: "Name", value: "Richa Kandhway" },
-  { label: "Email", value: "richakandhway@gmail.com" },
+  { label: "Email", value: "richakandhway11@gmail.com" },
   { label: "Location", value: "India" },
   { label: "Program", value: "Bachelor of Commerce (B.Com)" },
   { label: "Year", value: "2nd Year" },

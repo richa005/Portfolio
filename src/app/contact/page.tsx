@@ -16,10 +16,10 @@ import { useLenis } from "@/hooks/useLenis";
 const contactInfo = [
   {
     title: "Email",
-    value: "richakandhway@gmail.com",
+    value: "richakandhway11@gmail.com",
     icon: "📧",
     color: "#f4a5b8",
-    link: "mailto:richakandhway@gmail.com",
+    link: "mailto:richakandhway11@gmail.com",
   },
   {
     title: "LinkedIn",
@@ -419,13 +419,13 @@ export default function ContactPage() {
 
               <div className="flex flex-wrap justify-center gap-4">
                 <motion.a
-                  href="mailto:richakandhway@gmail.com"
+                  href="mailto:richakandhway11@gmail.com"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={animations.snappy}
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium text-[#0a0a0c] bg-gradient-to-r from-[#f4a5b8] to-[#c8b6ff] hover:shadow-lg hover:shadow-[#f4a5b8]/25 transition-shadow"
                 >
-                  📧 richakandhway@gmail.com
+                  📧 richakandhway11@gmail.com
                 </motion.a>
               </div>
 

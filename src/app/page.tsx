@@ -209,7 +209,7 @@ export default function Home() {
                     <span className="text-[#6d6875] text-sm">Connect:</span>
                     {[
                       { name: "LinkedIn", href: "https://www.linkedin.com/in/richa-kandhway-782655330" },
-                      { name: "Email", href: "mailto:richakandhway@gmail.com" },
+                      { name: "Email", href: "mailto:richakandhway11@gmail.com" },
                     ].map((social) => (
                       <motion.a
                         key={social.name}
@@ -486,13 +486,13 @@ export default function Home() {
                   </Link>
                 </motion.div>
                 <motion.a
-                  href="mailto:richakandhway@gmail.com"
+                  href="mailto:richakandhway11@gmail.com"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={animations.snappy}
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium text-[#8b8693] border border-white/[0.1] hover:text-white hover:border-white/[0.2] transition-all"
                 >
-                  richakandhway@gmail.com
+                  richakandhway11@gmail.com
                 </motion.a>
               </div>
             </FadeInSection>
