@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
-import { animations, staggerContainer, fadeUp } from "@/lib/animations";
+import { animations, staggerContainer, fadeUp, easings } from "@/lib/animations";
 
 const footerLinks = {
   navigation: [
@@ -48,41 +48,62 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="relative bg-[#0a0a0c] border-t border-white/[0.05]">
-      {/* Gradient accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-[#f4a5b8]/50 to-transparent" />
+    <footer className="relative bg-[var(--background)] border-t border-[var(--border-subtle)]">
+      {/* Gradient accent line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[var(--rose)] to-transparent opacity-50" />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      {/* Background decoration */}
+      <div 
+        className="absolute bottom-0 left-0 w-96 h-96 opacity-10 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, var(--rose-glow-strong), transparent 60%)",
+          filter: "blur(60px)",
+        }}
+      />
+      <div 
+        className="absolute top-1/2 right-0 w-80 h-80 opacity-10 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, var(--lilac-glow-strong), transparent 60%)",
+          filter: "blur(60px)",
+        }}
+      />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid md:grid-cols-4 gap-12"
+          className="grid md:grid-cols-4 gap-12 lg:gap-16"
         >
           {/* Brand */}
           <motion.div variants={fadeUp} className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-4">
-              <Logo className="w-12 h-12" />
-              <span className="text-xl font-medium text-white" style={{ fontFamily: 'var(--font-cormorant)' }}>
+            <Link href="/" className="flex items-center gap-4 mb-6 group">
+              <motion.div
+                whileHover={{ scale: 1.05, rotate: 5 }}
+                transition={animations.bouncy}
+              >
+                <Logo className="w-14 h-14" />
+              </motion.div>
+              <span className="text-2xl font-medium text-[var(--foreground)]" style={{ fontFamily: 'var(--font-cormorant)' }}>
                 Richa Kandhway
               </span>
             </Link>
-            <p className="text-[#8b8693] leading-relaxed max-w-sm mb-6">
+            <p className="text-[var(--foreground-subtle)] leading-relaxed max-w-sm mb-8">
               B.Com student passionate about finance and accounting. 
               Seeking opportunities to learn, grow, and contribute with dedication.
             </p>
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               {footerLinks.social.map((item) => (
                 <motion.a
                   key={item.name}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileHover={{ scale: 1.1, y: -4 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={animations.snappy}
-                  className="p-3 bg-[#151419] rounded-xl text-[#8b8693] hover:text-[#f4a5b8] border border-white/[0.05] hover:border-[#f4a5b8]/30 transition-colors"
+                  transition={animations.bouncy}
+                  className="p-3.5 glass-rose rounded-2xl text-[var(--foreground-subtle)] hover:text-[var(--rose)] transition-all duration-300"
                 >
                   {item.icon}
                 </motion.a>
@@ -92,48 +113,66 @@ export const Footer = () => {
           
           {/* Navigation */}
           <motion.div variants={fadeUp}>
-            <h4 className="text-white font-medium mb-4 text-sm uppercase tracking-wider">Navigation</h4>
-            <ul className="space-y-3">
-              {footerLinks.navigation.map((link) => (
-                <li key={link.name}>
+            <h4 className="gradient-text font-medium mb-6 text-sm uppercase tracking-[0.2em]">Navigation</h4>
+            <ul className="space-y-4">
+              {footerLinks.navigation.map((link, idx) => (
+                <motion.li 
+                  key={link.name}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.05 }}
+                >
                   <Link
                     href={link.href}
-                    className="text-[#8b8693] hover:text-[#f4a5b8] transition-colors text-sm"
+                    className="link-underline text-[var(--foreground-subtle)] text-sm inline-block"
                   >
                     {link.name}
                   </Link>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </motion.div>
           
           {/* Contact */}
           <motion.div variants={fadeUp}>
-            <h4 className="text-white font-medium mb-4 text-sm uppercase tracking-wider">Get in Touch</h4>
-            <ul className="space-y-3 text-[#8b8693] text-sm">
+            <h4 className="gradient-text font-medium mb-6 text-sm uppercase tracking-[0.2em]">Get in Touch</h4>
+            <ul className="space-y-4 text-[var(--foreground-subtle)] text-sm">
               <li>
                 <a 
                   href="mailto:richakandhway11@gmail.com" 
-                  className="hover:text-[#f4a5b8] transition-colors"
+                  className="link-glow block"
                 >
                   richakandhway11@gmail.com
                 </a>
               </li>
-              <li>India</li>
-              <li className="pt-2">
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--sage)]"></span>
+                India
+              </li>
+              <li className="pt-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 text-[#f4a5b8] hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-[var(--rose)] hover:gap-4 transition-all font-medium group"
                 >
                   Send a message
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <motion.svg 
+                    className="w-4 h-4" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: easings.gentle }}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                  </motion.svg>
                 </Link>
               </li>
             </ul>
           </motion.div>
         </motion.div>
+        
+        {/* Divider */}
+        <div className="divider-glow my-12" />
         
         {/* Bottom bar */}
         <motion.div
@@ -141,36 +180,44 @@ export const Footer = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="mt-12 pt-8 border-t border-white/[0.05] flex flex-col md:flex-row items-center justify-between gap-4"
+          className="flex flex-col md:flex-row items-center justify-between gap-4"
         >
-          <p className="text-[#6d6875] text-sm">
+          <p className="text-[var(--foreground-faint)] text-sm">
             © {currentYear} Richa Kandhway. All rights reserved.
           </p>
-          <p className="text-[#6d6875] text-sm flex items-center gap-2">
+          <p className="text-[var(--foreground-faint)] text-sm flex items-center gap-2">
             Crafted with
             <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="text-[#f4a5b8]"
+              animate={{ scale: [1, 1.3, 1] }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+              className="text-[var(--rose)] inline-block"
             >
               ♥
             </motion.span>
-            using Next.js
           </p>
         </motion.div>
       </div>
       
-      {/* Back to top */}
+      {/* Back to top button */}
       <motion.button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        whileHover={{ scale: 1.1, y: -2 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        whileHover={{ scale: 1.1, y: -4 }}
         whileTap={{ scale: 0.9 }}
-        transition={animations.snappy}
-        className="fixed bottom-8 right-8 p-3 rounded-full bg-gradient-to-r from-[#f4a5b8] to-[#c8b6ff] text-[#0a0a0c] shadow-lg shadow-[#f4a5b8]/20 z-50"
+        transition={animations.bouncy}
+        className="fixed bottom-8 right-8 p-4 rounded-2xl btn-primary shadow-lg z-50 group"
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <motion.svg 
+          className="w-5 h-5" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          animate={{ y: [0, -2, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
+        </motion.svg>
       </motion.button>
     </footer>
   );

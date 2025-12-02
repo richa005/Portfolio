@@ -13,8 +13,8 @@ const technicalSkills = [
   { name: "Microsoft Excel", progress: 85, icon: "📊" },
   { name: "Accounting Basics", progress: 80, icon: "📚" },
   { name: "Financial Analysis", progress: 75, icon: "📈" },
-  { name: "Tally", progress: 70, icon: "💼" },
-  { name: "Data Entry", progress: 90, icon: "⌨️" },
+  { name: "Tableau", progress: 70, icon: "📉" },
+  { name: "Power BI", progress: 70, icon: "📊" },
   { name: "MS Office Suite", progress: 88, icon: "📱" },
 ];
 

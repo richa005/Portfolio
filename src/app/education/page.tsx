@@ -4,12 +4,16 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { TiltCard } from "@/components/ui/tilt-card";
-import { AnimatedText, GradientText } from "@/components/ui/animated-text";
-import { ScrollProgress, FadeInSection } from "@/components/ui/scroll-effects";
+import { ScrollProgress } from "@/components/ui/scroll-effects";
 import { CustomCursor } from "@/components/ui/custom-cursor";
-import { animations, staggerContainer, fadeUp } from "@/lib/animations";
+import { staggerContainer, fadeUp, cardHover } from "@/lib/animations";
 import { useLenis } from "@/hooks/useLenis";
+import { FloatingPetals } from "@/components/ui/floating-petals";
+import { SpotlightCard } from "@/components/ui/spotlight";
+import { MagneticButton } from "@/components/ui/magnetic";
+import { WordPullUp } from "@/components/ui/text-animations";
+import { ScrollReveal, StaggerReveal, StaggerItem, Parallax } from "@/components/ui/scroll-animations";
+import { Bento3DCard, FeatureCard } from "@/components/ui/bento-cards";
 
 // Education data
 const education = [
@@ -26,7 +30,7 @@ const education = [
       "Corporate Law",
       "Business Statistics",
     ],
-    color: "#f4a5b8",
+    color: "#f2b5c4",
     current: true,
   },
   {
@@ -42,7 +46,7 @@ const education = [
       "Mathematics",
       "English",
     ],
-    color: "#c8b6ff",
+    color: "#d4c6ff",
     current: false,
   },
   {
@@ -58,7 +62,7 @@ const education = [
       "English",
       "Hindi",
     ],
-    color: "#e8c872",
+    color: "#f0d78c",
     current: false,
   },
 ];
@@ -69,53 +73,53 @@ const achievements = [
     title: "Consistent Academic Performance",
     description: "Maintained excellent grades throughout academic journey",
     icon: "🏆",
-    color: "#f4a5b8",
+    color: "#f2b5c4",
   },
   {
     title: "Active Participation",
     description: "Regularly participated in class activities and group projects",
     icon: "🎯",
-    color: "#c8b6ff",
+    color: "#d4c6ff",
   },
   {
     title: "Quick Learner",
     description: "Recognized for quickly grasping complex financial concepts",
     icon: "⚡",
-    color: "#e8c872",
+    color: "#f0d78c",
   },
   {
     title: "Team Player",
     description: "Effective collaboration in group assignments and presentations",
     icon: "🤝",
-    color: "#a8d5ba",
+    color: "#a8dbc5",
   },
 ];
 
 // Certifications/Courses (Future goals)
 const certifications = [
   {
-    title: "Tally ERP 9",
-    provider: "Self Learning",
+    title: "Stock Market Course",
+    provider: "NISM Certification",
     status: "In Progress",
-    color: "#f4a5b8",
+    color: "#f2b5c4",
   },
   {
-    title: "Advanced Excel",
+    title: "Tableau",
     provider: "Online Course",
     status: "Planned",
-    color: "#c8b6ff",
+    color: "#d4c6ff",
   },
   {
     title: "GST Certification",
     provider: "Professional Course",
     status: "Planned",
-    color: "#e8c872",
+    color: "#f0d78c",
   },
   {
     title: "Financial Modeling",
     provider: "Online Course",
     status: "Planned",
-    color: "#a8d5ba",
+    color: "#a8dbc5",
   },
 ];
 
@@ -127,24 +131,19 @@ export default function EducationPage() {
       <CustomCursor />
       <ScrollProgress />
       <Navigation />
+      
+      {/* Elegant Petals Background - Education */}
+      <FloatingPetals count={20} />
 
-      <main className="min-h-screen bg-[#0a0a0c] pt-24">
+      <main className="min-h-screen bg-[var(--background)] pt-24 relative z-10">
         {/* ===== HERO SECTION ===== */}
-        <section className="relative py-20 overflow-hidden">
-          {/* Background Elements */}
-          <motion.div
-            className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
-            style={{
-              background: "radial-gradient(circle, rgba(232,200,114,0.08) 0%, transparent 60%)",
-              top: "-10%",
-              right: "-10%",
-              filter: "blur(60px)",
-            }}
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          />
+        <section className="relative py-24 overflow-hidden">
+          {/* Enhanced Background */}
+          <div className="absolute inset-0 bg-grid-elegant opacity-40" />
+          <div className="absolute inset-0 bg-vignette" />
+          <div className="absolute inset-0 bg-noise" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               variants={staggerContainer}
               initial="hidden"
@@ -152,20 +151,24 @@ export default function EducationPage() {
               className="text-center mb-16"
             >
               <motion.div variants={fadeUp}>
-                <span className="text-[#8b8693] text-sm tracking-[0.2em] uppercase">
-                  My Education
+                <span className="inline-block px-4 py-2 rounded-full glass-gold text-[var(--gold)] text-sm tracking-[0.25em] uppercase font-medium">
+                  ✦ My Education
                 </span>
               </motion.div>
-              <motion.h1
-                variants={fadeUp}
-                className="text-5xl md:text-7xl text-white mt-4"
-                style={{ fontFamily: "var(--font-cormorant)" }}
-              >
-                <AnimatedText text="Academic Journey" />
-              </motion.h1>
+              
+              <Parallax speed={0.3} className="mt-6">
+                <motion.h1
+                  variants={fadeUp}
+                  className="text-5xl md:text-7xl lg:text-8xl text-[var(--foreground)]"
+                  style={{ fontFamily: "var(--font-cormorant)" }}
+                >
+                  <WordPullUp words="Academic Journey" />
+                </motion.h1>
+              </Parallax>
+              
               <motion.p
                 variants={fadeUp}
-                className="text-[#8b8693] text-lg max-w-2xl mx-auto mt-6"
+                className="text-[var(--foreground-subtle)] text-lg md:text-xl max-w-2xl mx-auto mt-8 leading-relaxed"
               >
                 Building a strong foundation in commerce and finance
               </motion.p>
@@ -174,31 +177,51 @@ export default function EducationPage() {
         </section>
 
         {/* ===== EDUCATION TIMELINE SECTION ===== */}
-        <section className="relative py-20 bg-[#0d0d10]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative py-24 bg-[var(--background-secondary)]">
+          <div className="absolute inset-0 bg-noise opacity-30" />
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#f4a5b8]/50 via-[#c8b6ff]/50 to-[#e8c872]/50 transform md:-translate-x-1/2" />
+              {/* Timeline line with animated gradient */}
+              <motion.div 
+                className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px transform md:-translate-x-1/2"
+                style={{ 
+                  background: "linear-gradient(to bottom, var(--rose), var(--lilac), var(--gold))",
+                }}
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+              />
 
               {education.map((edu, idx) => (
-                <FadeInSection key={idx} delay={idx * 0.15}>
+                <ScrollReveal key={idx} delay={idx * 0.15}>
                   <div
                     className={`relative flex items-start gap-8 mb-16 ${
                       idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                     }`}
                   >
-                    {/* Timeline dot */}
-                    <div
-                      className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full transform -translate-x-1/2 z-10"
-                      style={{ backgroundColor: edu.color }}
+                    {/* Timeline dot with glow */}
+                    <motion.div
+                      className="absolute left-4 md:left-1/2 w-5 h-5 rounded-full transform -translate-x-1/2 z-10"
+                      style={{ 
+                        backgroundColor: edu.color,
+                        boxShadow: `0 0 20px ${edu.color}60`
+                      }}
+                      whileHover={{ scale: 1.4 }}
+                      transition={{ type: "spring", stiffness: 300 }}
                     >
                       {edu.current && (
-                        <span
-                          className="absolute inset-0 rounded-full animate-ping"
-                          style={{ backgroundColor: edu.color, opacity: 0.5 }}
-                        />
+                        <>
+                          <span
+                            className="absolute inset-0 rounded-full animate-ping"
+                            style={{ backgroundColor: edu.color, opacity: 0.5 }}
+                          />
+                          <span
+                            className="absolute -inset-2 rounded-full animate-pulse"
+                            style={{ backgroundColor: edu.color, opacity: 0.2 }}
+                          />
+                        </>
                       )}
-                    </div>
+                    </motion.div>
 
                     {/* Content card */}
                     <div
@@ -206,18 +229,25 @@ export default function EducationPage() {
                         idx % 2 === 0 ? "md:pr-12" : "md:pl-12"
                       }`}
                     >
-                      <TiltCard glareEnabled={false}>
+                      <SpotlightCard className="h-full">
                         <motion.div
-                          whileHover={{ y: -5 }}
-                          transition={animations.smooth}
-                          className="p-8 rounded-3xl bg-[#151419] border border-white/[0.05] hover:border-white/[0.1] transition-colors"
+                          variants={cardHover}
+                          initial="initial"
+                          whileHover="hover"
+                          className="p-8 rounded-3xl relative overflow-hidden"
                         >
+                          {/* Accent glow */}
+                          <div
+                            className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-30 blur-3xl"
+                            style={{ backgroundColor: edu.color }}
+                          />
+                          
                           {/* Status badge */}
-                          <div className="flex items-center gap-3 mb-4">
+                          <div className="relative z-10 flex items-center gap-3 mb-4">
                             <span
-                              className="px-3 py-1 rounded-full text-xs font-medium"
+                              className="px-3 py-1.5 rounded-full text-xs font-medium glass shimmer"
                               style={{
-                                backgroundColor: `${edu.color}15`,
+                                backgroundColor: `${edu.color}20`,
                                 color: edu.color,
                               }}
                             >
@@ -233,227 +263,229 @@ export default function EducationPage() {
 
                           {/* Degree & Institution */}
                           <h3
-                            className="text-2xl text-white mb-2"
+                            className="relative z-10 text-2xl gradient-text mb-2"
                             style={{ fontFamily: "var(--font-cormorant)" }}
                           >
                             {edu.degree}
                           </h3>
-                          <p className="text-[#8b8693] mb-4">{edu.institution}</p>
+                          <p className="relative z-10 text-[var(--foreground-subtle)] mb-4">{edu.institution}</p>
 
                           {/* Description */}
-                          <p className="text-[#6d6875] text-sm mb-6">{edu.description}</p>
+                          <p className="relative z-10 text-[var(--foreground-muted)] text-sm mb-6">{edu.description}</p>
 
                           {/* Highlights */}
-                          <div className="flex flex-wrap gap-2">
+                          <div className="relative z-10 flex flex-wrap gap-2">
                             {edu.highlights.map((highlight, hIdx) => (
-                              <span
+                              <motion.span
                                 key={hIdx}
-                                className="px-3 py-1.5 rounded-full text-xs bg-white/[0.03] text-[#a8a3b3] border border-white/[0.05]"
+                                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+                                className="px-3 py-1.5 rounded-full text-xs glass text-[var(--foreground-subtle)] border border-white/[0.08] transition-colors"
                               >
                                 {highlight}
-                              </span>
+                              </motion.span>
                             ))}
                           </div>
                         </motion.div>
-                      </TiltCard>
+                      </SpotlightCard>
                     </div>
                   </div>
-                </FadeInSection>
+                </ScrollReveal>
               ))}
             </div>
           </div>
         </section>
 
         {/* ===== ACHIEVEMENTS SECTION ===== */}
-        <section className="relative py-32 bg-[#0a0a0c]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <FadeInSection>
+        <section className="relative py-32 bg-[var(--background)]">
+          <div className="absolute inset-0 bg-grid-elegant opacity-20" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ScrollReveal>
               <div className="text-center mb-16">
-                <span className="text-[#8b8693] text-sm tracking-[0.2em] uppercase">
-                  Achievements
+                <span className="inline-block px-4 py-2 rounded-full glass-rose text-[var(--rose)] text-sm tracking-[0.25em] uppercase font-medium">
+                  ✦ Achievements
                 </span>
                 <h2
-                  className="text-4xl md:text-5xl text-white mt-4"
+                  className="text-4xl md:text-5xl lg:text-6xl gradient-text mt-6"
                   style={{ fontFamily: "var(--font-cormorant)" }}
                 >
-                  Academic <GradientText text="Highlights" />
+                  Academic Highlights
                 </h2>
               </div>
-            </FadeInSection>
+            </ScrollReveal>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {achievements.map((achievement, idx) => (
-                <FadeInSection key={idx} delay={idx * 0.1}>
-                  <motion.div
-                    whileHover={{ y: -5, scale: 1.02 }}
-                    transition={animations.smooth}
-                    className="p-6 rounded-2xl bg-[#151419] border border-white/[0.05] hover:border-white/[0.1] transition-colors text-center h-full"
-                  >
-                    <div
-                      className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl"
-                      style={{ backgroundColor: `${achievement.color}15` }}
-                    >
-                      {achievement.icon}
-                    </div>
-                    <h3
-                      className="text-lg text-white font-medium mb-2"
-                      style={{ fontFamily: "var(--font-cormorant)" }}
-                    >
-                      {achievement.title}
-                    </h3>
-                    <p className="text-[#8b8693] text-sm">{achievement.description}</p>
-                  </motion.div>
-                </FadeInSection>
-              ))}
-            </div>
+            <StaggerReveal>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {achievements.map((achievement, idx) => (
+                  <StaggerItem key={idx}>
+                    <FeatureCard
+                      icon={achievement.icon}
+                      title={achievement.title}
+                      description={achievement.description}
+                      gradient={`from-[${achievement.color}] to-[${achievement.color}80]`}
+                    />
+                  </StaggerItem>
+                ))}
+              </div>
+            </StaggerReveal>
           </div>
         </section>
 
         {/* ===== CERTIFICATIONS SECTION ===== */}
-        <section className="relative py-32 bg-[#0d0d10]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <FadeInSection>
+        <section className="relative py-32 bg-[var(--background-secondary)]">
+          <div className="absolute inset-0 bg-noise opacity-30" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ScrollReveal>
               <div className="text-center mb-16">
-                <span className="text-[#8b8693] text-sm tracking-[0.2em] uppercase">
-                  Certifications & Courses
+                <span className="inline-block px-4 py-2 rounded-full glass-lilac text-[var(--lilac)] text-sm tracking-[0.25em] uppercase font-medium">
+                  ✦ Certifications & Courses
                 </span>
                 <h2
-                  className="text-4xl md:text-5xl text-white mt-4"
+                  className="text-4xl md:text-5xl lg:text-6xl gradient-text mt-6"
                   style={{ fontFamily: "var(--font-cormorant)" }}
                 >
                   Learning roadmap
                 </h2>
-                <p className="text-[#8b8693] max-w-xl mx-auto mt-4">
+                <p className="text-[var(--foreground-subtle)] max-w-xl mx-auto mt-4">
                   Courses and certifications I&apos;m pursuing to enhance my professional skills
                 </p>
               </div>
-            </FadeInSection>
+            </ScrollReveal>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {certifications.map((cert, idx) => (
-                <FadeInSection key={idx} delay={idx * 0.1}>
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    transition={animations.smooth}
-                    className="p-6 rounded-2xl bg-[#151419] border border-white/[0.05] relative overflow-hidden"
-                  >
-                    {/* Status indicator */}
-                    <div
-                      className="absolute top-0 right-0 px-3 py-1 text-xs rounded-bl-xl"
-                      style={{
-                        backgroundColor: `${cert.color}15`,
-                        color: cert.color,
-                      }}
-                    >
-                      {cert.status}
-                    </div>
+            <StaggerReveal>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                {certifications.map((cert, idx) => (
+                  <StaggerItem key={idx}>
+                    <Bento3DCard>
+                      <div className="p-6 rounded-2xl relative overflow-hidden">
+                        {/* Status indicator */}
+                        <div
+                          className="absolute top-0 right-0 px-3 py-1.5 text-xs rounded-bl-xl glass"
+                          style={{
+                            backgroundColor: `${cert.color}20`,
+                            color: cert.color,
+                          }}
+                        >
+                          {cert.status}
+                        </div>
 
-                    <h3
-                      className="text-lg text-white mb-2 mt-4"
-                      style={{ fontFamily: "var(--font-cormorant)" }}
-                    >
-                      {cert.title}
-                    </h3>
-                    <p className="text-[#6d6875] text-sm">{cert.provider}</p>
+                        <h3
+                          className="text-lg text-[var(--foreground)] mb-2 mt-4"
+                          style={{ fontFamily: "var(--font-cormorant)" }}
+                        >
+                          {cert.title}
+                        </h3>
+                        <p className="text-[var(--foreground-muted)] text-sm">{cert.provider}</p>
 
-                    {/* Progress indicator */}
-                    <div className="mt-4 h-1 bg-white/[0.05] rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{
-                          width: cert.status === "In Progress" ? "40%" : cert.status === "Planned" ? "0%" : "100%",
-                        }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: "easeOut" }}
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: cert.color }}
-                      />
-                    </div>
-                  </motion.div>
-                </FadeInSection>
-              ))}
-            </div>
+                        {/* Progress indicator */}
+                        <div className="mt-4 h-1.5 bg-white/[0.05] rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{
+                              width: cert.status === "In Progress" ? "40%" : cert.status === "Planned" ? "0%" : "100%",
+                            }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.2, ease: [0.25, 0.8, 0.25, 1] }}
+                            className="h-full rounded-full relative overflow-hidden"
+                            style={{ backgroundColor: cert.color }}
+                          >
+                            <div className="absolute inset-0 shimmer" />
+                          </motion.div>
+                        </div>
+                      </div>
+                    </Bento3DCard>
+                  </StaggerItem>
+                ))}
+              </div>
+            </StaggerReveal>
           </div>
         </section>
 
         {/* ===== STATS SECTION ===== */}
-        <section className="relative py-32 bg-[#0a0a0c]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-4 gap-8 text-center">
-              {[
-                { value: "2nd", label: "Year of B.Com", color: "#f4a5b8" },
-                { value: "3", label: "Education Levels", color: "#c8b6ff" },
-                { value: "15+", label: "Subjects Studied", color: "#e8c872" },
-                { value: "4", label: "Certifications Planned", color: "#a8d5ba" },
-              ].map((stat, idx) => (
-                <FadeInSection key={idx} delay={idx * 0.1}>
-                  <motion.div
-                    whileHover={{ y: -5 }}
-                    transition={animations.smooth}
-                    className="p-6 rounded-2xl bg-[#151419] border border-white/[0.05]"
-                  >
-                    <p
-                      className="text-4xl font-bold mb-2"
-                      style={{ color: stat.color, fontFamily: "var(--font-space)" }}
-                    >
-                      {stat.value}
-                    </p>
-                    <p className="text-[#8b8693] text-sm">{stat.label}</p>
-                  </motion.div>
-                </FadeInSection>
-              ))}
-            </div>
+        <section className="relative py-32 bg-[var(--background)]">
+          <div className="absolute inset-0 bg-grid-elegant opacity-20" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <StaggerReveal>
+              <div className="grid md:grid-cols-4 gap-8 text-center">
+                {[
+                  { value: "2nd", label: "Year of B.Com", color: "#f2b5c4" },
+                  { value: "3", label: "Education Levels", color: "#d4c6ff" },
+                  { value: "15+", label: "Subjects Studied", color: "#f0d78c" },
+                  { value: "4", label: "Certifications Planned", color: "#a8dbc5" },
+                ].map((stat, idx) => (
+                  <StaggerItem key={idx}>
+                    <Bento3DCard>
+                      <div className="p-6 rounded-2xl relative overflow-hidden text-center">
+                        <motion.p
+                          className="text-4xl md:text-5xl font-bold mb-2 relative z-10"
+                          style={{ color: stat.color, fontFamily: "var(--font-space)" }}
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          {stat.value}
+                        </motion.p>
+                        <p className="text-[var(--foreground-subtle)] text-sm relative z-10">{stat.label}</p>
+                      </div>
+                    </Bento3DCard>
+                  </StaggerItem>
+                ))}
+              </div>
+            </StaggerReveal>
           </div>
         </section>
 
         {/* ===== CTA SECTION ===== */}
-        <section className="relative py-32 bg-[#0d0d10]">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <FadeInSection>
+        <section className="relative py-32 bg-[var(--background-secondary)]">
+          <div className="absolute inset-0 bg-noise opacity-30" />
+          
+          {/* Decorative gradient orb */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20"
+            style={{ background: 'radial-gradient(circle, rgba(240,215,140,0.15), transparent 60%)', filter: 'blur(80px)' }} />
+          
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <ScrollReveal>
               <h2
-                className="text-4xl md:text-5xl text-white mb-6"
+                className="text-4xl md:text-5xl lg:text-6xl gradient-text-animated mb-6"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 Let&apos;s connect
               </h2>
-              <p className="text-[#8b8693] text-lg max-w-2xl mx-auto mb-10">
+              <p className="text-[var(--foreground-subtle)] text-lg max-w-2xl mx-auto mb-10">
                 Interested in learning more about me or discussing opportunities? I&apos;d love to hear from you.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={animations.snappy}
-                >
+                <MagneticButton>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium text-[#0a0a0c] bg-gradient-to-r from-[#f4a5b8] to-[#c8b6ff] hover:shadow-lg hover:shadow-[#f4a5b8]/25 transition-shadow"
+                    className="btn-primary inline-flex items-center gap-2"
                   >
                     Get In Touch
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <motion.svg 
+                      className="w-4 h-4" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                      whileHover={{ x: 3 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M17 8l4 4m0 0l-4 4m4-4H3"
                       />
-                    </svg>
+                    </motion.svg>
                   </Link>
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={animations.snappy}
-                >
+                </MagneticButton>
+                <MagneticButton>
                   <Link
                     href="/skills"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium text-white border border-white/[0.15] hover:border-[#f4a5b8]/50 hover:bg-white/[0.02] transition-all"
+                    className="btn-secondary inline-flex items-center gap-2"
                   >
                     View Skills
                   </Link>
-                </motion.div>
+                </MagneticButton>
               </div>
-            </FadeInSection>
+            </ScrollReveal>
           </div>
         </section>
       </main>
